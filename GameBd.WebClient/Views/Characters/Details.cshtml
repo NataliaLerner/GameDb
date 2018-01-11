@@ -1,0 +1,50 @@
+﻿@model GameBd.WebClient.Models.Characters
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Characters</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nickname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nickname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_created)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Guilds.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guilds.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.login)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.character_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

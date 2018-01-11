@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="GameDb.Desktop.Pages.Auth.Views.AuthSignUpView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:desktopBase="clr-namespace:GameDb.Desktop.Base;assembly=GameDb.Desktop.Base"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:vm="clr-namespace:GameDb.Desktop.Pages.Auth.ViewModels"
+             xmlns:mvvm="http://prismlibrary.com/"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:converters="clr-namespace:GameDb.Desktop.Base.Converters;assembly=GameDb.Desktop.Base"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance vm:AuthSignUpViewModel}">
+    <UserControl.Resources>
+        <converters:MultiPasswordBoxConverter x:Key="MultiPasswordBoxConverter"/>
+    </UserControl.Resources>
+    
+    <Grid  HorizontalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <GroupBox Header="New user account registration" Width="450"
+                  Grid.Row="0">
+            <DockPanel >
+                <Button DockPanel.Dock="Bottom" Margin="5" Content="Sign Up" 
+                        Command="{Binding SignUpCommand}"
+                        TabIndex="6">
+                    <Button.CommandParameter>
+                        <MultiBinding Converter="{StaticResource MultiPasswordBoxConverter}">
+                            <Binding ElementName="PwBox1"/>
+                            <Binding ElementName="PwBox2"/>
+                        </MultiBinding>
+                    </Button.CommandParameter>
+                </Button>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBox controls:TextBoxHelper.Watermark="First name" Grid.Row="0" Margin="5" TabIndex="1"
+                             Text="{Binding FirstName}"/>
+                    <TextBox controls:TextBoxHelper.Watermark="Last name" Grid.Row="1" Margin="5" TabIndex="2"
+                             Text="{Binding LastName}"/>
+                    <TextBox controls:TextBoxHelper.Watermark="Email" Grid.Row="2" Margin="5" TabIndex="2"
+                             Text="{Binding Email}"/>
+                    <TextBox controls:TextBoxHelper.Watermark="Login" Grid.Row="3" Margin="5" TabIndex="3"
+                             Text="{Binding Login}"/>
+                    <PasswordBox x:Name="PwBox1" controls:TextBoxHelper.Watermark="Password" Grid.Row="4" Margin="5" TabIndex="4"
+                                 controls:PasswordBoxHelper.CapsLockWarningToolTip="Caps Lock is on" />
+                    <PasswordBox x:Name="PwBox2" controls:TextBoxHelper.Watermark="Confirm password" Grid.Row="5" Margin="5"
+                                 controls:PasswordBoxHelper.CapsLockWarningToolTip="Caps Lock is on" TabIndex="5"/>
+                </Grid>
+            </DockPanel>
+        </GroupBox>
+
+        <Button Grid.Row="1" Content="Return to the start page" HorizontalAlignment="Left" Margin="5"
+                Command="{Binding NavigateCommand}" CommandParameter="{x:Static desktopBase:PageNames.AuthPage}" 
+                IsTabStop="False"/>
+    </Grid>
+</UserControl>

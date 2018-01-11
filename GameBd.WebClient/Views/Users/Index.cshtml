@@ -1,0 +1,63 @@
+﻿@model IEnumerable<GameBd.WebClient.Models.Users>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Users</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Login
+        </th>
+        <th>
+            Firstname
+        </th>
+        <th>
+            Lastname
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Registration date
+        </th>
+        <th>
+            User group
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.login)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserGroups.descr)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.user_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.user_id }) |
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.user_id })*@
+        </td>
+    </tr>
+}
+
+</table>

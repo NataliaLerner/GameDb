@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="GameDb.Desktop.Pages.Main.Views.MainPageView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:desktopBase="clr-namespace:GameDb.Desktop.Base;assembly=GameDb.Desktop.Base"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:vm="clr-namespace:GameDb.Desktop.Pages.Main.ViewModels"
+             xmlns:mvvm="http://prismlibrary.com/"
+             mvvm:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance vm:MainPageViewModel}">
+    <Grid HorizontalAlignment="Center" Width="500" Height="500">
+        <GroupBox Header="Main page">
+            <DockPanel>
+                <ToolBar DockPanel.Dock="Top">
+                    <Button Content="Signout" Command="{Binding SignOutCommand}"/>
+                </ToolBar>
+                <ListBox DockPanel.Dock="Top" x:Name="Pages" ItemsSource="{Binding Pages}" SelectedItem="{Binding SelectedPage}">
+                    <ListBox.ItemTemplate >
+                        <DataTemplate DataType="{x:Type vm:PageConfiguration}">
+                            <Button Content="{Binding DisplayName}" 
+                                    Command="{Binding ElementName=Pages, Path=DataContext.NavigateCommand}"
+                                    CommandParameter="{Binding PageEnumValue}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>
